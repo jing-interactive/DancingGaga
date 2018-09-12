@@ -1,33 +1,40 @@
 # DancingGaga
-Openpose implementation using darknet framework, forked from [openpose-darknet](https://github.com/lincolnhard/openpose-darknet)
+[Openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose
+) implementation using darknet framework, originated from [openpose-darknet](https://github.com/lincolnhard/openpose-darknet)
 
-<b>[Openpose]</b><p>
-https://github.com/CMU-Perceptual-Computing-Lab/openpose
+# Result
 
-<b>[Darknet]</b><p>
-https://github.com/pjreddie/darknet
+![demo](https://raw.githubusercontent.com/jing-interactive/DancingGaga/master/doc/gaga1.gif)
 
-<b>[Result]</b><p>
-![demo](https://user-images.githubusercontent.com/16308037/34094455-333f678c-e408-11e7-9546-f8aeb3df39c2.jpg)
+# Steps to build from Visual Studio 2015
 
-<b>[Benchmark]</b><p> 51.634ms for 200x200x3 net input size running on GTX 1060, which is 3x faster than original caffe implementation
+- First you need to build [lightnet](https://github.com/jing-vision/lightnet)
+  - `git clone --recurse-submodules https://github.com/jing-vision/lightnet.git`
+  - Follow [lightnet's building steps](https://github.com/jing-vision/lightnet#how-to-build-from-visual-studio-2015)
+- Then you need to have `premake5` installed and execute `gen-vs2015.bat` to generate `vs2015` folder
+- You can find `DancingGaga.sln` inside `vs2015` folder, you should be able to build it w/o errors. (If you are lucky like me.)
 
-<b>[Weight file] (darknet version openpose.weight)</b><p>
-https://drive.google.com/open?id=1BfY0Hx2d2nm3I4JFh0W1cK2aHD1FSGea
+
+# Steps to run
+
+- Download [weight file](https://drive.google.com/open?id=1BfY0Hx2d2nm3I4JFh0W1cK2aHD1FSGea) and copy it as `bin/openpose.weight`
   
-<b>[Usage] in bin/ folder</b><p>
-```Bash
-DancingGaga.exe -cfg=[image file] -weights=[cfg file] [weight file]
-#example
-DancingGaga.exe -cfg=openpose.cfg -weights=openpose.weight data/person.jpg
+- Usage
 ```
-
-<b>[note]</b><p>
-1. Darknet version openpose.cfg and openpose.weight are ported from COCO version 
-
-  [pose_deploy_linevec.prototxt](https://github.com/ZheC/Realtime_Multi-Person_Pose_Estimation/tree/master/model/_trained_COCO) and [pose_iter_440000.caffemodel](  http://posefs1.perception.cs.cmu.edu/Users/ZheCao/pose_iter_440000.caffemodel).
-
-2. You could change net input width, height in openpose.cfg.
+DancingGaga.exe -cfg=[openpose.cfg] -weights=[openpose.weight] media-source
+```
+e.g you can detect pose from a video
+```
+DancingGaga.exe pickme-101.mp4
+```
+Or from an image
+```
+DancingGaga.exe person.jpg
+```
+Or even from your default camera (index #0)
+```
+DancingGaga.exe 0
+```
 
 # network layout
 
@@ -141,3 +148,11 @@ layer     filters    size              input                output
  105 conv     19  1 x 1 / 1    25 x  25 x 128   ->    25 x  25 x  19 0.003 BF
  106 route  105 97
 ```
+
+# Note
+
+1. Darknet version openpose.cfg and openpose.weight are ported from COCO version 
+
+  [pose_deploy_linevec.prototxt](https://github.com/ZheC/Realtime_Multi-Person_Pose_Estimation/tree/master/model/_trained_COCO) and [pose_iter_440000.caffemodel](  http://posefs1.perception.cs.cmu.edu/Users/ZheCao/pose_iter_440000.caffemodel).
+
+2. You could change net input width, height in openpose.cfg.

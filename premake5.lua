@@ -56,7 +56,7 @@ solution "DancingGaga"
             "../lightnet/modules/darknet/3rdparty/include",
             "../lightnet/modules/darknet/src",
             "src",
-            "../lightnet/src",
+            "../lightnet/include",
             path.join("$(CUDA_PATH)", "include"),
             path.join(OPENCV_PATH, "include")
         }
