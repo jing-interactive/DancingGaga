@@ -31,6 +31,10 @@
 *.out
 *.app
 
+*.ilk
+*.pdb
 
 vs201*
 *.weight
+*.mp4
+_releases
