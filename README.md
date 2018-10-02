@@ -35,7 +35,12 @@ Or even from your default camera (index #0)
 ```
 DancingGaga.exe 0
 ```
-
+- Other network models
+```
+DancingGaga.exe -cfg=..\coco.cfg -weights=..\coco.weights person.jpg
+DancingGaga.exe -cfg=..\mpi.cfg -weights=..\mpi.weights person.jpg
+DancingGaga.exe -cfg=..\body_25.cfg -weights=..\body_25.weights person.jpg
+```
 # network layout
 
 ```
