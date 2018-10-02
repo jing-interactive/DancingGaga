@@ -11,8 +11,8 @@
 - First you need to build [lightnet](https://github.com/jing-vision/lightnet)
   - `git clone --recurse-submodules https://github.com/jing-vision/lightnet.git`
   - Follow [lightnet's building steps](https://github.com/jing-vision/lightnet#how-to-build-from-visual-studio-2015)
-- Then you need to have [premake](https://premake.github.io/download.html) installed and execute `gen-vs2015.bat` to generate `vs2015` folder
-- You can find `DancingGaga.sln` inside `vs2015` folder, you should be able to build it w/o errors. (If you are lucky like me.)
+- Then you need to have [premake](https://premake.github.io/download.html) installed and execute `DancingGaga/gen-vs2015.bat` to generate `DancingGaga/vs2015` folder
+- You can find `DancingGaga/vs2015/DancingGaga.sln`, you should be able to build it w/o errors. (If you are lucky like me.)
 
 
 # Steps to run
