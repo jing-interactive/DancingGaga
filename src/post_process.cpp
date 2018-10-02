@@ -54,7 +54,16 @@ void render_pose_keypoints(
             POSE_BODY_25_COLORS_RENDER_GPU
         };
     }
-    else if (s_model == PoseModel::COCO_18)
+    else if (s_model == PoseModel::MPI_15)
+    {
+        pairs = {
+            POSE_MPI_PAIRS_RENDER_GPU
+        };
+        colors = {
+            POSE_MPI_COLORS_RENDER_GPU
+        };
+    }
+    else /*if (s_model == PoseModel::COCO_18)*/
     {
         pairs = {
             POSE_COCO_PAIRS_RENDER_GPU
@@ -118,12 +127,13 @@ void connect_bodyparts(
 
     keypoint_shape.resize(3);
 
-    vector<unsigned int> body_part_pairs = getPosePartPairs(s_model);
-    vector<unsigned int> limb_idx = getPoseMapIndex(s_model);
+    const vector<unsigned int>& body_part_pairs = getPosePartPairs(s_model);
+    const vector<unsigned int>& limb_idx = getPoseMapIndex(s_model);
     const int num_body_parts = getPoseNumberBodyParts(s_model);
-    const int num_body_part_pairs = num_body_parts + 1;
+    const int num_body_part_pairs = body_part_pairs.size() / 2;
     std::vector<std::pair<std::vector<int>, double>> subset;
     const int subset_counter_index = num_body_parts;
+    const int subset_size = num_body_parts + 1;
     const int peaks_offset = 3 * (POSE_MAX_PEOPLE + 1);
     const int map_offset = mapw * maph;
 
@@ -156,7 +166,7 @@ void connect_bodyparts(
                     }
                     if (!num)
                     {
-                        std::vector<int> row_vector(num_body_part_pairs, 0);
+                        std::vector<int> row_vector(subset_size, 0);
                         // store the index
                         row_vector[body_partB] = body_partB * peaks_offset + i * 3 + 2;
                         // the parts number of that person
@@ -183,7 +193,7 @@ void connect_bodyparts(
                     }
                     if (!num)
                     {
-                        std::vector<int> row_vector(num_body_part_pairs, 0);
+                        std::vector<int> row_vector(subset_size, 0);
                         // store the index
                         row_vector[body_partA] = body_partA * peaks_offset + i * 3 + 2;
                         // parts number of that person
@@ -337,7 +347,7 @@ void connect_bodyparts(
                         // if A is not found in the subset, create new one and add both
                         if (num == 0)
                         {
-                            std::vector<int> row_vector(num_body_part_pairs, 0);
+                            std::vector<int> row_vector(subset_size, 0);
                             row_vector[body_partA] = indexA;
                             row_vector[body_partB] = indexB;
                             row_vector[subset_counter_index] = 2;

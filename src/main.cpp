@@ -147,6 +147,11 @@ int main(int argc, char **argv)
         setPoseModel(op::PoseModel::BODY_25);
         cout << "setPoseModel BODY_25" << endl;
     }
+    else if (cfg_path.find("mpi") != string::npos)
+    {
+        setPoseModel(op::PoseModel::MPI_15);
+        cout << "setPoseModel MPI" << endl;
+    }
 
     uint32_t NET_OUT_CHANNELS = getNetOutChannels();
 
