@@ -53,7 +53,8 @@ solution "DancingGaga"
         kind "ConsoleApp"
         includedirs {
             "../lightnet/modules",
-            "../lightnet/modules/darknet/3rdparty/include",
+            "../lightnet/modules/darknet/include",
+            "../lightnet/modules/darknet/3rdparty/pthreads/include",
             "../lightnet/modules/darknet/src",
             "src",
             "../lightnet/include",
